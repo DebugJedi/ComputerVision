@@ -1,0 +1,6 @@
+train: /Users/Maverick_BOX/Library/CloudStorage/OneDrive-Personal/Priyank Doc/python practice/STREAMLIT_APP/ObjectDetection/src/train
+val: /Users/Maverick_BOX/Library/CloudStorage/OneDrive-Personal/Priyank Doc/python practice/STREAMLIT_APP/ObjectDetection/src/val
+
+nc: 5
+
+names: ["FingersCross", "OK","PeaceOut","ThumbsDown","ThumbsUp"]

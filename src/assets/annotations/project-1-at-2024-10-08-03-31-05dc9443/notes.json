@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "FingersCross"
+    },
+    {
+      "id": 1,
+      "name": "OK"
+    },
+    {
+      "id": 2,
+      "name": "PeaceOut"
+    },
+    {
+      "id": 3,
+      "name": "ThumbsDown"
+    },
+    {
+      "id": 4,
+      "name": "ThumbsUp"
+    }
+  ],
+  "info": {
+    "year": 2024,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}
