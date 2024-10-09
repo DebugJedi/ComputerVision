@@ -3,24 +3,32 @@ import cv2
 from ultralytics import YOLO
 import tempfile
 import numpy as np
-
-# model = YOLO("src/best.pt")
+import time
+model = YOLO("src/best.pt")
 
 st.title("Real-Time Object Detection with YOLO")
+# Initialize webcam
+cap = cv2.VideoCapture(0)
 
-# st.sidebar.title("Settings")
-# confidence = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.8)
-# webcam = st.sidebar.checkbox("Use Webcam", value=True)
-def test_webcam(index=0):
-    cap = cv2.VideoCapture(index)
-    if not cap.isOpened():
-        print(f"Cannot open webcam with index {index}")
-        return
+# Placeholder for video frames
+stframe = st.empty()
 
-    print(f"Webcam {index} opened successfully.")
-    cap.release()
+# Stream video frames
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        st.error("Failed to grab frame")
+        break
 
-if __name__ == "__main__":
-    success = test_webcam(0)  # Try index 0 first
-    if not success:
-        test_webcam(1)
+    # Perform object detection
+    results = model.predict(source=frame, conf=0.8, save=False)
+
+    # Annotate frame
+    annotated_frame = results[0].plot()
+    annotated_frame = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
+
+    # Display in Streamlit
+    stframe.image(annotated_frame, channels="RGB")
+
+    # Control frame rate
+    time.sleep(0.03)  # Approximately 30 FPS
