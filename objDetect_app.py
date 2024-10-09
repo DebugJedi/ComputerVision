@@ -1,45 +1,56 @@
 import streamlit as st
-import cv2
+from streamlit_webrtc import VideoTransformerBase, webrtc_streamer, WebRtcMode, ClientSettings
 from ultralytics import YOLO
-import numpy as np
+import cv2
 
-# Load YOLO model
-@st.cache_resource
-def load_model():
-    return YOLO("src/best.pt")
+# Define the transformer class
+class YOLOTransformer(VideoTransformerBase):
+    def __init__(self):
+        self.model = YOLO("src/best.pt")  # Ensure the path is correct
+        self.conf_threshold = 0.8
 
-model = load_model()
+    def transform(self, frame):
+        img = frame.to_ndarray(format="bgr24")
+        results = self.model.predict(source=img, conf=self.conf_threshold, save=False)
+        annotated_img = results[0].plot()
+        return annotated_img
 
-st.title("Real-Time Object Detection with YOLO")
+def main():
+    st.title("Real-Time Object Detection with YOLO and Streamlit")
 
-# Add a button to start/stop the webcam
-run = st.button("Start/Stop Webcam")
+    # Sidebar settings
+    st.sidebar.title("Settings")
+    model_path = st.sidebar.text_input("YOLO Model Path", "src/best.pt")
+    conf_threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.8)
 
-# Placeholder for video frames
-stframe = st.empty()
+    # Update the transformer with new settings if changed
+    class YOLOTransformerCustom(VideoTransformerBase):
+        def __init__(self):
+            self.model = YOLO(model_path)
+            self.conf_threshold = conf_threshold
 
-# Initialize webcam
-cap = cv2.VideoCapture(0)
+        def transform(self, frame):
+            img = frame.to_ndarray(format="bgr24")
+            results = self.model.predict(source=img, conf=self.conf_threshold, save=False)
+            annotated_img = results[0].plot()
+            return annotated_img
 
-while run:
-    ret, frame = cap.read()
-    if not ret:
-        st.error("Failed to grab frame from webcam")
-        break
+    # WebRTC Configuration
+    WEBRTC_CLIENT_SETTINGS = ClientSettings(
+        rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+        },
+        media_stream_constraints={"video": True, "audio": False},
+    )
 
-    # Perform object detection
-    results = model.predict(source=frame, conf=0.5, save=False)
+    # Initialize the webrtc streamer
+    webrtc_streamer(
+        key="yolo-object-detection",
+        mode=WebRtcMode.SENDRECV,
+        client_settings=WEBRTC_CLIENT_SETTINGS,
+        video_transformer_factory=YOLOTransformerCustom,
+        async_transform=True,
+    )
 
-    # Annotate frame
-    annotated_frame = results[0].plot()
-    annotated_frame = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
-
-    # Display in Streamlit
-    stframe.image(annotated_frame, channels="RGB", use_column_width=True)
-
-    # Check if the stop button is pressed
-    if not run:
-        break
-
-# Release the webcam when stopped
-cap.release()
+if __name__ == "__main__":
+    main()
