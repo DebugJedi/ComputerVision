@@ -15,7 +15,7 @@ def main():
         st.session_state.running = not st.session_state.running
 
     FRAME_WINDOW = st.image([])
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(1)
 
     while st.session_state.running:
         _, frame = camera.read()
