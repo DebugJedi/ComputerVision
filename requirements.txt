@@ -9,7 +9,7 @@ pytz==2022.7.1
 PyYAML==6.0.2
 regex==2024.9.11
 requests==2.32.3
-streamlit==1.39.0
+streamlit
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 tensorflow==2.16.2
@@ -22,3 +22,4 @@ tqdm==4.66.5
 ultralytics==8.3.7
 libgl1-mesa-glx
 libglib2.0-0
+ultralytics>=8.0.0,<8.4.0
