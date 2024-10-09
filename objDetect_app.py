@@ -1,34 +1,45 @@
 import streamlit as st
 import cv2
 from ultralytics import YOLO
-import tempfile
 import numpy as np
-import time
-model = YOLO("src/best.pt")
+
+# Load YOLO model
+@st.cache_resource
+def load_model():
+    return YOLO("src/best.pt")
+
+model = load_model()
 
 st.title("Real-Time Object Detection with YOLO")
-# Initialize webcam
-cap = cv2.VideoCapture(0)
+
+# Add a button to start/stop the webcam
+run = st.button("Start/Stop Webcam")
 
 # Placeholder for video frames
 stframe = st.empty()
 
-# Stream video frames
-while True:
+# Initialize webcam
+cap = cv2.VideoCapture(0)
+
+while run:
     ret, frame = cap.read()
     if not ret:
-        st.error("Failed to grab frame")
+        st.error("Failed to grab frame from webcam")
         break
 
     # Perform object detection
-    results = model.predict(source=frame, conf=0.8, save=False)
+    results = model.predict(source=frame, conf=0.5, save=False)
 
     # Annotate frame
     annotated_frame = results[0].plot()
     annotated_frame = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
 
     # Display in Streamlit
-    stframe.image(annotated_frame, channels="RGB")
+    stframe.image(annotated_frame, channels="RGB", use_column_width=True)
 
-    # Control frame rate
-    time.sleep(0.03)  # Approximately 30 FPS
+    # Check if the stop button is pressed
+    if not run:
+        break
+
+# Release the webcam when stopped
+cap.release()
