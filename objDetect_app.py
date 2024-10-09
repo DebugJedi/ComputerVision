@@ -21,4 +21,4 @@ def test_webcam(index=0):
     cap.release()
 
 if __name__ == "__main__":
-    test_webcam(0)
+    test_webcam(1)
