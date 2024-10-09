@@ -21,4 +21,6 @@ def test_webcam(index=0):
     cap.release()
 
 if __name__ == "__main__":
-    test_webcam(1)
+    success = test_webcam(0)  # Try index 0 first
+    if not success:
+        test_webcam(1)
