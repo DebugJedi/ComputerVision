@@ -1,3 +1,4 @@
+Python <3.5
 pip
 matplotlib==3.9.2
 nltk==3.9.1
@@ -21,5 +22,3 @@ torchvision==0.19.1
 tornado==6.4.1
 tqdm
 ultralytics
-libgl1-mesa-glx
-libglib2.0-0
