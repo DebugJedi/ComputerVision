@@ -1,3 +1,4 @@
+pip
 matplotlib==3.9.2
 nltk==3.9.1
 numpy==1.26.4
