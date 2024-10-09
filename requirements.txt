@@ -3,14 +3,13 @@ matplotlib==3.9.2
 nltk==3.9.1
 numpy==1.26.4
 openai==1.51.1
-opencv-python==4.10.0.84
+
 pandas==2.2.3
 pydantic==2.9.2
 pytz==2022.7.1
 PyYAML==6.0.2
 regex==2024.9.11
 requests==2.32.3
-streamlit
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 tensorflow==2.16.2
@@ -24,3 +23,6 @@ ultralytics==8.3.7
 libgl1-mesa-glx
 libglib2.0-0
 ultralytics>=8.0.0,<8.4.0
+streamlit==1.31.0
+opencv-python-headless==4.8.0.74
+ultralytics==8.3.7
