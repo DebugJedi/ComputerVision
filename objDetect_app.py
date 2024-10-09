@@ -3,8 +3,7 @@ import cv2
 from ultralytics import YOLO
 from src import predict
 
-def main():
-    st.title("Webcam Object Detection")
+st.title("Webcam Object Detection")
     # model = predict.predict_stream()
    
     # # Create a button to start/stop the webcam
@@ -26,5 +25,3 @@ def main():
     
     # camera.release()
 
-if __name__ == '__main__':
-    main()
