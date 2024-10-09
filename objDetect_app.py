@@ -5,7 +5,7 @@ from src import predict
 
 def main():
     st.title("Webcam Object Detection")
-    model = predict.predict_stream()
+    # model = predict.predict_stream()
    
     # # Create a button to start/stop the webcam
     # if 'running' not in st.session_state:
