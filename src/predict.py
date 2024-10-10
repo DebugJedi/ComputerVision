@@ -2,9 +2,9 @@ from ultralytics import YOLO
 
 
 
-def predict_stream(run=False):
+def predict_stream(run=True):
     while run:
-        model = YOLO("src/best.pt")
+        model = YOLO("src/yolo11m.pt")
         model.predict(source='1', show= True, save = False, conf= 0.8)
         
 if __name__ =='__main__':
