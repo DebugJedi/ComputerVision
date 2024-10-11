@@ -67,9 +67,10 @@ def main():
                                            range(len(custClassesLst)), 
                                            format_func= lambda x: custClassesLst[x])
 
-    isAllinList = 6 in classes_index
+    isAllinList = 5 in classes_index
     if isAllinList == True:
         classes_index = classes_index.clear()
+        
 
     print("Selected Classes: ", classes_index)
 
@@ -96,11 +97,11 @@ def main():
                 picture = Image.open(uploaded_file)
                 picture.save(os.path.join("data", "images", uploaded_file.name))
                 data_source = os.path.join('data', 'images', uploaded_file.name)
-        elif not uploaded_file:
-            is_valid = True
-            st.sidebar.text("Please upload a image to procced")
-        else: 
+        else: #not uploaded_file
             is_valid = False
+            st.sidebar.text("Please upload a image to procced")
+        # else: 
+        #     is_valid = False
     elif source_index == 1:
         
         uploaded_file = st.sidebar.file_uploader("Upload Video", type = ['mp4'])
@@ -115,27 +116,30 @@ def main():
 
                 data_source = os.path.join('data', 'videos', uploaded_file.name)
 
-        elif uploaded_file is None:
-            is_valid = True
+        else: # uploaded_file is None
+            is_valid = False
             st.sidebar.text("Upload video to procced")
-        else:
-            is_valid = False
+        # else:
+        #     is_valid = False
     else:
+        is_valid = False
+        st.write("Live feed is currently unaviable, please choose other options...")
 
-        selectedCam = st.sidebar.selectbox("select Camera",("Use Webcam", "Use Other Camera"), index=0)
-        if selectedCam:
-            if selectedCam == "Use Other Camera":
-                data_source = int(1)
-                is_valid = True
+    #     selectedCam = st.sidebar.selectbox("select Camera",("Use Webcam", "Use Other Camera"), index=0)
+    #     if selectedCam:
+    #         if selectedCam == "Use Other Camera":
+    #             data_source = int(1)
+    #             is_valid = True
 
-            else:
-                data_source = int(0)
-                is_valid = True
-        else:
-            is_valid = False
-        st.sidebar.markdown("<strong> Press 'q' multiple times on camera window and Ctrl + C on CMD to clear camera window/exit</strong>", unsafe_allow_html=True)
+    #         else:
+    #             data_source = int(0)
+    #             is_valid = True
+    #     else:
+    #         is_valid = False
+        #     st.sidebar.markdown("<strong> Press 'q' multiple times on camera window and Ctrl + C on CMD to clear camera window/exit</strong>", unsafe_allow_html=True)
     if is_valid:
         print('valid')
+        # if classes_index:
         if st.button('Detect'):
             if classes_index:
                 with st.spinner(text = 'Detecting, please wait.....'):
