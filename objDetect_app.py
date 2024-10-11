@@ -31,7 +31,7 @@ st.markdown(
 
 #################### Title #####################################################
 st.markdown("<h3 style='text-align: center; color: red; font-family: font of choice, fallback font no1, sans-serif;'>Yolo 11m</h3>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center; color: black; font-family: font of choice, fallback font no1, sans-serif;'>Multiple Object Detection on Pretrained Model</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: white; font-family: font of choice, fallback font no1, sans-serif;'>Multiple Object Detection on Pretrained Model</h2>", unsafe_allow_html=True)
 #st.markdown('---') # inserts underline
 #st.markdown("<hr/>", unsafe_allow_html=True) # inserts underline
 st.markdown('#') # inserts empty space
