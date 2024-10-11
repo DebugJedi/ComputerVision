@@ -141,6 +141,7 @@ def main():
         print('valid')
         # if classes_index:
         if st.button('Detect'):
+            st.markdown("### Output")
             if classes_index:
                 with st.spinner(text = 'Detecting, please wait.....'):
                     model.predict( 
@@ -190,9 +191,9 @@ def main():
                         break
                 
                 cap.release()
-                st.markdown("### Output")
-                st.write("Path of saved Video: ", video_file)
-                st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'label'))
+                
+                # st.write("Path of saved Video: ", video_file)
+                # st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'label'))
                 st.balloons()
 
             else:
@@ -202,8 +203,8 @@ def main():
                             liveFeedVideoFile = os.path.join(get_detection_folder(), vid)
 
                     st.markdown("### Output")
-                    st.write("Path of Live Feed Saved Video: ", liveFeedVideoFile)
-                    st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
+                    # st.write("Path of Live Feed Saved Video: ", liveFeedVideoFile)
+                    # st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
                     st.balloons()
 
 
