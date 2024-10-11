@@ -165,9 +165,9 @@ def main():
                             pathImg = os.path.join(get_detection_folder(), img)
                             st.image(pathImg)
 
-                    st.markdown("### Output")
-                    st.write("Path of Saved Images: ", pathImg)
-                    st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
+                    # st.markdown("### Output")
+                    # st.write("Path of Saved Images: ", pathImg)
+                    # st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
                     st.balloons()
 
             elif source_index ==1:
@@ -197,15 +197,16 @@ def main():
                 st.balloons()
 
             else:
-                with st.spinner(text = 'Preparing stream'):
-                    for vid in os.listdir(get_detection_folder()):
-                        if vid.endswith(".mp4"):
-                            liveFeedVideoFile = os.path.join(get_detection_folder(), vid)
+                st.write("Live feed is currently unaviable, please choose other options...")
+                # with st.spinner(text = 'Preparing stream'):
+                #     for vid in os.listdir(get_detection_folder()):
+                #         if vid.endswith(".mp4"):
+                #             liveFeedVideoFile = os.path.join(get_detection_folder(), vid)
 
-                    st.markdown("### Output")
-                    # st.write("Path of Live Feed Saved Video: ", liveFeedVideoFile)
-                    # st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
-                    st.balloons()
+                #     st.markdown("### Output")
+                #     # st.write("Path of Live Feed Saved Video: ", liveFeedVideoFile)
+                #     # st.write("Path of TXT File: ", os.path.join(get_detection_folder(), 'labels'))
+                #     st.balloons()
 
 
 
