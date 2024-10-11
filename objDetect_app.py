@@ -79,7 +79,7 @@ def main():
 
     Device = st.sidebar.selectbox("Select Devices", deviceLst, index=0)
     print("Devices: ", Device)
-    MIN_SCORE_THRES = st.sidebar.slider('Min Confidence Score Threshold', min_value = 0.0, max_value = 1.0, value = 0.4)
+    MIN_SCORE_THRES = st.sidebar.slider('Min Confidence Score Threshold', min_value = 0.0, max_value = 1.0, value = 0.65)
 
     # Parameter to setup
 
