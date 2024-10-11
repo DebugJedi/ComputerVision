@@ -1,6 +1,6 @@
 runs*
 newimages*
-*.jpg
+#*.jpg
 testvdc.mov
 myenv
 file.txt
